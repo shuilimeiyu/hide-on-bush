@@ -1,0 +1,25 @@
+'''百度api图片文字识别'''
+
+'''
+Created on 2019年10月24日
+
+@author: lgl
+'''
+from aip import AipOcr
+
+""" 你的 APPID AK SK """
+APP_ID = '17716542'
+API_KEY = 'fczb8KUaHu509SUPgdC2FFKK'
+SECRET_KEY = 'Rz0DdkfpvuCZtBeef8joefmR2mFLioPu'
+
+client = AipOcr(APP_ID, API_KEY, SECRET_KEY)
+""" 读取图片 """
+def get_file_content(filePath):
+    with open(filePath, 'rb') as fp:
+        return fp.read()
+image = get_file_content('/home/lgl/Desktop/timg.jpeg')
+
+""" 调用通用文字识别, 图片参数为本地图片 """
+ret = client.basicGeneral(image);
+for req in ret['words_result']:
+    print(req['words'])
